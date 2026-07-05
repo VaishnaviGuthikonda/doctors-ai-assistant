@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor's AI Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>Doctor's AI Assistant</h1>
+
+    <div class="patient-details">
+      <input type="text" id="patientName" placeholder="Patient Name" />
+      <input type="number" id="patientAge" placeholder="Patient Age" />
+    </div>
+
+    <div class="transcript-section">
+      <p id="liveTranscript" class="live">Transcript will appear here...</p>
+      <textarea id="editableTranscript" placeholder="Transcript will appear here for editing..."></textarea>
+    </div>
+
+    <div class="buttons">
+      <button id="recordBtn">Start Recording</button>
+      <button id="clearBtn">Clear</button>
+      <button id="generateBtn" disabled>Generate Report</button>
+    </div>
+
+  </div>
+
+  <div class="container review-section" id="reviewSection" style="display:none; margin-top: 30px;">
+    <h2>Review Report</h2>
+    <p class="review-hint">Review and edit the report before downloading.</p>
+
+    <div class="review-field">
+      <label>Patient Name</label>
+      <input type="text" id="rName" />
+    </div>
+
+    <div class="review-field">
+      <label>Patient Age</label>
+      <input type="number" id="rAge" />
+    </div>
+
+    <div class="review-field">
+      <label>Diagnosis</label>
+      <textarea id="rDiagnosis"></textarea>
+    </div>
+
+    <div class="review-field">
+      <label>Risk Flags (one per line)</label>
+      <textarea id="rRiskFlags"></textarea>
+    </div>
+
+    <div id="rProcedures"></div>
+
+    <div class="review-field">
+      <label>General Recommendations</label>
+      <textarea id="rRecommendations"></textarea>
+    </div>
+
+    <div class="review-field">
+      <label>Disclaimer</label>
+      <textarea id="rDisclaimer"></textarea>
+    </div>
+
+    <button id="downloadBtn">Download PDF</button>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
