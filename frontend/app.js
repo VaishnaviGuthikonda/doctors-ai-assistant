@@ -99,33 +99,34 @@ generateBtn.addEventListener("click", async () => {
 
 // Populate review section
 function populateReview(data) {
-  document.getElementById("rName").value = data.patientName;
-  document.getElementById("rAge").value = data.patientAge;
-  document.getElementById("rDiagnosis").value = data.diagnosis;
-  document.getElementById("rRiskFlags").value = data.patientRiskFlags.join("\n");
-  document.getElementById("rRecommendations").value = data.generalRecommendations;
-  document.getElementById("rDisclaimer").value = data.disclaimer;
+  document.getElementById("rName").value = data.patientName || "";
+  document.getElementById("rAge").value = data.patientAge || "";
+  document.getElementById("rDiagnosis").value = data.diagnosis || "";
+  document.getElementById("rRiskFlags").value = (data.patientRiskFlags || []).join("\n");
+  document.getElementById("rRecommendations").value = data.generalRecommendations || "";
+  document.getElementById("rDisclaimer").value = data.disclaimer || "";
 
   const proceduresDiv = document.getElementById("rProcedures");
   proceduresDiv.innerHTML = "";
 
-  data.procedures.forEach((proc, i) => {
+  const procedures = data.procedures || [];
+  procedures.forEach((proc, i) => {
     proceduresDiv.innerHTML += `
       <div class="procedure-block">
         <h3>Procedure ${i + 1}</h3>
         ${proc.conflictsWithPatientProfile ? '<div class="conflict-warning">⚠ Conflict with patient profile</div>' : ""}
         <label>Name</label>
-        <textarea class="proc-name">${proc.name}</textarea>
+        <textarea class="proc-name">${proc.name || ""}</textarea>
         <label>Description</label>
-        <textarea class="proc-desc">${proc.description}</textarea>
+        <textarea class="proc-desc">${proc.description || ""}</textarea>
         <label>Pros (one per line)</label>
-        <textarea class="proc-pros">${proc.pros.join("\n")}</textarea>
+        <textarea class="proc-pros">${(proc.pros || []).join("\n")}</textarea>
         <label>Cons (one per line)</label>
-        <textarea class="proc-cons">${proc.cons.join("\n")}</textarea>
+        <textarea class="proc-cons">${(proc.cons || []).join("\n")}</textarea>
         <label>Complications (one per line)</label>
-        <textarea class="proc-comp">${proc.complications.join("\n")}</textarea>
+        <textarea class="proc-comp">${(proc.complications || []).join("\n")}</textarea>
         <label>Patient Specific Notes</label>
-        <textarea class="proc-notes">${proc.patientSpecificNotes}</textarea>
+        <textarea class="proc-notes">${proc.patientSpecificNotes || ""}</textarea>
       </div>
     `;
   });
@@ -133,6 +134,7 @@ function populateReview(data) {
   reviewSection.style.display = "block";
   reviewSection.scrollIntoView({ behavior: "smooth" });
 }
+    
 
 // Download PDF
 downloadBtn.addEventListener("click", () => {

@@ -42,14 +42,14 @@ async function searchProcedures(procedures) {
       })
     ]);
 
-    const complications = [
+   const complications = [
       complicationsRes.answer || "",
-      ...complicationsRes.results.map(r => `${r.title}: ${r.content}`)
+      ...complicationsRes.results.map(r => `${r.title}: ${r.content.slice(0, 300)}`)
     ].join("\n");
 
     const prosCons = [
       prosConsRes.answer || "",
-      ...prosConsRes.results.map(r => `${r.title}: ${r.content}`)
+      ...prosConsRes.results.map(r => `${r.title}: ${r.content.slice(0, 300)}`)
     ].join("\n");
 
     return { procedure: proc, complications, prosCons };
